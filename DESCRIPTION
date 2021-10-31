@@ -1,0 +1,17 @@
+Package: brrr
+Title: Accurate estimation in relative risk regression
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Francesco",
+           family = "Pozza",
+           role = c("aut", "cre"),
+           email = "francesco.pozza.2@phd.unipd.it",
+           comment = c(ORCID = "0000-0001-8109-6849"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9001
+Imports: 
+    stats
