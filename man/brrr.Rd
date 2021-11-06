@@ -2,7 +2,7 @@
 % Please edit documentation in R/brrr.R
 \name{brrr}
 \alias{brrr}
-\title{Title}
+\title{Accurate relative risk estimation}
 \usage{
 brrr(
   x,
@@ -16,9 +16,11 @@ brrr(
 )
 }
 \arguments{
-\item{x}{matrix of explanatory variables for log-relative risk}
+\item{x}{matrix of explanatory variables for log-relative risk,
+the first column is the intercept of the model}
 
-\item{z}{matrix of explanatory variables for the nuisance parameter}
+\item{z}{matrix of explanatory variables for the nuisance parameter,
+the first column is the intercept of the model}
 
 \item{y}{binary response variable}
 
@@ -36,5 +38,51 @@ brrr(
 
 }
 \description{
-Title
+Accurate relative risk estimation
+}
+\examples{
+#####################################################
+## Relative risk regression with brrr            ####
+#####################################################
+
+library(brrr)
+library(HSAUR3)
+
+##################################################
+###       Respiratory dataset                  ###
+### available on HSAUR3 R package              ###
+##################################################
+
+data <- HSAUR3::respiratory
+
+## Creating response variable, binary risk factor and model matrices
+id <- seq.int(from = 5, to =  555, by  = 5)
+data_matrix <- model.matrix(~., data[id, c(1,2,3,4,5)])
+y <- data_matrix[,6]
+t <- data_matrix[,3]
+x <- z <- data_matrix[,-c(3,6)]
+
+## maximum likelihood fit using R package brrr, model: Richardson et al. (2017)
+rr_mle <- brrr(x,z,y,t)
+summary(rr_mle)
+
+## Mean bias-reduced fit using the R package brrr, model: Richardson et al. (2017)
+rr_meanBR <- brrr(x,z,y,t, method = "MeanBr")
+summary(rr_meanBR)
+
+## Median bias-reduced fit using the R function brrr, model: Richardson et al. (2017)
+rr_medianBR <- brrr(x,z,y,t, method = "MedianBr")
+summary(rr_medianBR)
+
+## maximum likelihood fit using R package brrr, model: Alternative
+rr_mleA <- brrr(x,z,y,t, param = "Alternative")
+summary(rr_mleA)
+
+## Mean bias-reduced fit using the R package brrr, model: Alternative
+rr_meanBRA <- brrr(x,z,y,t, method = "MeanBr",param = "Alternative")
+summary(rr_meanBRA)
+
+## Median bias-reduced fit using the R function brrr, model: Alternative
+rr_medianBRA <- brrr(x,z,y,t, method = "MedianBr",param = "Alternative")
+summary(rr_medianBRA)
 }

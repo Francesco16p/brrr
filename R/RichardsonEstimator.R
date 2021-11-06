@@ -443,12 +443,12 @@ meth_richardson <- function(x,z=NULL,y,t,ep=1e-8,maxit=200, start=NULL, method= 
   controlA <- 0
   controlB <- 0
   # Mean bias reduction
-  if(method=="Firth")
+  if(method=="MeanBr")
   {
     controlA <- 1
   }
   # Median bias reduction
-  if(method=="Median")
+  if(method=="MedianBr")
   {
     controlA <- 1
     controlB <- 1
