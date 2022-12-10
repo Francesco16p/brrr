@@ -1,4 +1,5 @@
-#' Accurate relative risk estimation
+#' Improved and computationally stable relative risk estimation
+#' for a binary exposure
 #'
 #' @param x matrix of explanatory variables for the nuisance parameter,
 #' the first column is the intercept of the model
@@ -60,7 +61,7 @@
 #'rr_medianBRA <- brrr(x,z,y,t, method = "MedianBr",param = "Alternative")
 #'summary(rr_medianBRA)
 
-brrr <- function(x,z=NULL,y,t,maxit=150, start=NULL,param = "Richardson", method= "Mle")
+brrr <- function(x, z=NULL, y, t, maxit=150, start=NULL, param = "Richardson", method= "Mle")
 {
 
   # Change z and x so their are consistent with the notation in Kenne Pagui et al. (2023)

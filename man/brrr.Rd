@@ -2,7 +2,8 @@
 % Please edit documentation in R/brrr.R
 \name{brrr}
 \alias{brrr}
-\title{Accurate relative risk estimation}
+\title{Improved and computationally stable relative risk estimation
+for a binary exposure}
 \usage{
 brrr(
   x,
@@ -16,10 +17,10 @@ brrr(
 )
 }
 \arguments{
-\item{x}{matrix of explanatory variables for log-relative risk,
+\item{x}{matrix of explanatory variables for the nuisance parameter,
 the first column is the intercept of the model}
 
-\item{z}{matrix of explanatory variables for the nuisance parameter,
+\item{z}{matrix of explanatory variables for log-relative risk,
 the first column is the intercept of the model}
 
 \item{y}{binary response variable}
@@ -34,11 +35,9 @@ the first column is the intercept of the model}
 
 \item{method}{estimation method. Possible values are "Mle", "MeanBr" and "MedianBr"}
 }
-\value{
-
-}
 \description{
-Accurate relative risk estimation
+Improved and computationally stable relative risk estimation
+for a binary exposure
 }
 \examples{
 #####################################################

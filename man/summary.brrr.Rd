@@ -11,9 +11,6 @@
 
 \item{round}{Significant figures for the output}
 }
-\value{
-
-}
 \description{
 Summary function for an object with class brrr
 }
