@@ -1,8 +1,8 @@
 #' Accurate relative risk estimation
 #'
-#' @param x matrix of explanatory variables for log-relative risk,
+#' @param x matrix of explanatory variables for the nuisance parameter,
 #' the first column is the intercept of the model
-#' @param z matrix of explanatory variables for the nuisance parameter,
+#' @param z matrix of explanatory variables for log-relative risk,
 #' the first column is the intercept of the model
 #' @param y binary response variable
 #' @param t binary risk factor
@@ -62,6 +62,13 @@
 
 brrr <- function(x,z=NULL,y,t,maxit=150, start=NULL,param = "Richardson", method= "Mle")
 {
+
+  # Change z and x so their are consistent with the notation in Kenne Pagui et al. (2023)
+  x_swap <- z
+  z_swap <- x
+
+  x <- x_swap
+  z <- z_swap
 
   if(is.null(z)) # this control was necessary for the the plot but it makes
     # redudant the controls in the estimating functions
