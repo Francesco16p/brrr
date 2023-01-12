@@ -258,7 +258,7 @@ meth_alternative <- function(x,z=NULL,y,t,maxit=200, start=NULL, method= "Mle",s
       fit <- key_quantities(pars)
     }
     PQ32g <- with(fit,{
-      # parts costant in the matrix
+      # parts constant in the matrix
       PQ32g <- array(data = NA, dim= c(nvarx + nvarz,nvarx + nvarz, nvarx))
 
       for(t in 1:nvarx)
@@ -394,7 +394,7 @@ meth_alternative <- function(x,z=NULL,y,t,maxit=200, start=NULL, method= "Mle",s
     }
     for(k in 1:(nvarx + nvarz))
     {
-      f2.tilde[k] <- inv.info[k, ]%*%f2[k, ]
+      f2.tilde[k] <- inv.info[k, ]%*%f2[,k]
     }
     return(f2.tilde)
   }
@@ -443,6 +443,7 @@ meth_alternative <- function(x,z=NULL,y,t,maxit=200, start=NULL, method= "Mle",s
       else
       {
         testhalf <- sum(abs(step.par),na.rm=TRUE) > sum(abs(step.par.previous),na.rm = TRUE)
+        # condition not very precise
       }
       step.factor <- step.factor + 1
     }

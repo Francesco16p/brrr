@@ -1,9 +1,9 @@
 meth_richardson <- function(x,z=NULL,y,t,ep=1e-8,maxit=200, start=NULL, method= "Mle",slowit =1)
 {
-  # controll z
+  # control z
   if(is.null(z)) z <- x
 
-  # transorm x,z in matrix
+  # transform x,z in matrix
   x <- as.matrix(x)
   z <- as.matrix(z)
   #print(z)
@@ -77,11 +77,11 @@ meth_richardson <- function(x,z=NULL,y,t,ep=1e-8,maxit=200, start=NULL, method= 
   p0_dp0_eta2 <- function(eta1,eta2)
   {
     dp0.eta2 <- ( - ((exp(eta1) + 1) * exp(eta2)) / (2 * exp(eta1) *
-                                                       (exp(eta2) - 1) ^ 2) + exp(eta2) / ((exp(eta2) - 1) ^ 2 *
-                                                                                             sqrt(4 * exp(eta2 + eta1) + (exp(eta1) - 1) ^ 2 * exp(2 * eta2))
-                                                       ) + (exp( - eta1) * (exp(2 * eta1) + 1) * exp(2 * eta2)) /
+                   (exp(eta2) - 1) ^ 2) + exp(eta2) / ((exp(eta2) - 1) ^ 2 *
+                    sqrt(4 * exp(eta2 + eta1) + (exp(eta1) - 1) ^ 2 * exp(2 * eta2))
+                   ) + (exp( - eta1) * (exp(2 * eta1) + 1) * exp(2 * eta2)) /
                     (2 * (exp(eta2) - 1) ^ 2 * sqrt(4 * exp(eta2 + eta1) + (
-                      exp(eta1) - 1) ^ 2 * exp(2 * eta2))))
+                    exp(eta1) - 1) ^ 2 * exp(2 * eta2))))
     # extension for continuity
     dp0.eta2[abs(eta2)< ep] <- (exp(eta1[abs(eta2)< ep]) /
                                   (exp(eta1[abs(eta2)< ep]) + 1) ^ 3)
@@ -427,7 +427,7 @@ meth_richardson <- function(x,z=NULL,y,t,ep=1e-8,maxit=200, start=NULL, method= 
     }
     for(k in 1:(nvarx + nvarz))
     {
-      f2.tilde[k] <- inv.info[k, ]%*%f2[k, ]
+      f2.tilde[k] <- inv.info[k, ]%*%f2[,k]
     }
     return(f2.tilde)
   }
