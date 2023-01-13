@@ -99,28 +99,28 @@ brrr <- function(x, z=NULL, y, t, maxit=150, start=NULL, param = "Richardson", m
     }
   }
 
-  if(method != "Mle")
-  {
-    if(mod0$convergence==1){
-      mod1 <- try(est.function(x,z,y,t,maxit=4*maxit, start=mod0$Point.est, method= method,
-                               slowit = 1/2))
-      if(is.character(mod1)) mod1$convergence = 0
-      if(mod1$convergence!=1)
-      {
-        mod1 <- try(est.function(x,z,y,t,maxit=4*maxit,start=mod0$Point.est,
-                                 method= method,slowit = 1/4))
-      }
-    }
-    else{
-      mod1 <- try(est.function(x,z,y,t,maxit=maxit, method= method,slowit = 1/2))
-      if(is.character(mod1)) mod1$convergence <- 0
-      if(mod1$convergence!=1)
-      {
-        mod1 <- try(est.function(x,z,y,t,maxit=4*maxit, method= method, slowit = 1/4))
-      }
-    }
-    mod0 <- mod1
-  }
+  #if(method != "Mle")
+  #{
+  #  if(mod0$convergence==1){
+  #    mod1 <- try(est.function(x,z,y,t,maxit=4*maxit, start=mod0$Point.est, method= method,
+  #                             slowit = 1/2))
+  #    if(is.character(mod1)) mod1$convergence = 0
+  #    if(mod1$convergence!=1)
+  #    {
+  #      mod1 <- try(est.function(x,z,y,t,maxit=4*maxit,start=mod0$Point.est,
+  #                               method= method,slowit = 1/4))
+  #    }
+  #  }
+  #  else{
+  #    mod1 <- try(est.function(x,z,y,t,maxit=maxit, method= method,slowit = 1/2))
+  #    if(is.character(mod1)) mod1$convergence <- 0
+  #    if(mod1$convergence!=1)
+  #   {
+  #      mod1 <- try(est.function(x,z,y,t,maxit=4*maxit, method= method, slowit = 1/4))
+  #    }
+  #  }
+  #  mod0 <- mod1
+  #}
   # Quantities of interest
   pvalues <- 2*(1-stats::pnorm(abs(mod0$Point.est)/mod0$se))
   lower95 <- mod0$Point.est - mod0$se*stats::qnorm(0.975)

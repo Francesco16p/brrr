@@ -392,9 +392,9 @@ meth_alternative <- function(x,z=NULL,y,t,maxit=200, start=NULL, method= "Mle",s
       }
 
     }
-    for(k in 1:(nvarx + nvarz))
+    for(l in 1:(nvarx + nvarz))
     {
-      f2.tilde[k] <- inv.info[k, ]%*%f2[,k]
+      f2.tilde[l] <- inv.info[l, ]%*%f2[l,]
     }
     return(f2.tilde)
   }
@@ -405,7 +405,7 @@ meth_alternative <- function(x,z=NULL,y,t,maxit=200, start=NULL, method= "Mle",s
   max.step.factor<- 12
   epsilon <- 1e-5
   par <- start ## initial value
-  # Controll for mle, mean bias reduction and median
+  # Control for mle, mean bias reduction and median
   # bias reduction
   controlA <- 0
   controlB <- 0
@@ -448,13 +448,13 @@ meth_alternative <- function(x,z=NULL,y,t,maxit=200, start=NULL, method= "Mle",s
       step.factor <- step.factor + 1
     }
 
-    if ( (sum(abs(step.par),na.rm = TRUE) < epsilon) | (any(abs(par)>15)>0) ) {
-      break
+    if ( (sum(abs(adjusted.grad),na.rm = TRUE) < epsilon) | ( any(abs(par)>15) ) ) {
+      break # was (sum(abs(step.par),na.rm = TRUE) < epsilon)
     }
   }
 
 
-  if(iter >= maxit| (any(abs(par) > 15) > 0))
+  if(iter >= maxit| (any(abs(par) > 15)))
   {
     convergence <- 0
     warning("optimization failed to converge")

@@ -425,9 +425,9 @@ meth_richardson <- function(x,z=NULL,y,t,ep=1e-8,maxit=200, start=NULL, method= 
       }
 
     }
-    for(k in 1:(nvarx + nvarz))
+    for(l in 1:(nvarx + nvarz))
     {
-      f2.tilde[k] <- inv.info[k, ]%*%f2[,k]
+      f2.tilde[l] <- inv.info[l, ]%*%f2[l,]
     }
     return(f2.tilde)
   }
@@ -480,8 +480,9 @@ meth_richardson <- function(x,z=NULL,y,t,ep=1e-8,maxit=200, start=NULL, method= 
       step.factor <- step.factor + 1
     }
 
-    if ( (sum(abs(step.par),na.rm = TRUE) < epsilon) | (any(abs(par)>15)>0) ) {
-      break
+
+    if ( (sum(abs(adjusted.grad),na.rm = TRUE) < epsilon) | ( any(abs(par)>15) ) ) {
+      break # was (sum(abs(step.par),na.rm = TRUE) < epsilon)
     }
   }
 
