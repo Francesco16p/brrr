@@ -1,2 +1,2 @@
 # brrr
-Accurate estimation in relative risk regression 
+Improved and computationally stable estimation of relative risk regression with one binary exposure
